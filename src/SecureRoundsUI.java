@@ -1,15 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import java.sql.*;
+import java.util.*;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Danny
- */
 public class SecureRoundsUI extends javax.swing.JFrame {
-
+    /* tagID is for the intention that when a user logs in,
+        they will be tagged with their name which will be used
+        to see who created a form. Allows for backtracking of who
+        created the form */
+    static String tagID;
     /**
      * Creates new form SecureRoundsUI
      */
@@ -51,15 +49,15 @@ public class SecureRoundsUI extends javax.swing.JFrame {
 
         usernameBox.setToolTipText("Please enter a valid username.");
         usernameBox.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        usernameBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameBoxActionPerformed(evt);
-            }
-        });
 
         passwordBox.setToolTipText("Please enter a valid password.");
 
         submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
+            }
+        });
 
         quitButtom.setText("Quit");
         quitButtom.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +114,6 @@ public class SecureRoundsUI extends javax.swing.JFrame {
         jLabel2.getAccessibleContext().setAccessibleParent(jLabel2);
         usernameBox.getAccessibleContext().setAccessibleName("");
         usernameBox.getAccessibleContext().setAccessibleParent(usernameBox);
-        passwordBox.getAccessibleContext().setAccessibleDescription("Please enter a valid password.");
         passwordBox.getAccessibleContext().setAccessibleParent(passwordBox);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,13 +130,24 @@ public class SecureRoundsUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void usernameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameBoxActionPerformed
-        
-    }//GEN-LAST:event_usernameBoxActionPerformed
-
     private void quitButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtomActionPerformed
         System.exit(0);
     }//GEN-LAST:event_quitButtomActionPerformed
+
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        String user = usernameBox.getText();
+        String pass = passwordBox.getText();       
+        
+        if(user.contains("dbyland") && pass.contains("dbyland123") ||
+                user.contains("jcooper") && pass.contains("jcooper123") ||
+                user.contains("jmanno") && pass.contains("jmanno123") ||
+                user.contains("kvydra") && pass.contains("katya123")){
+            this.setVisible(false);
+            new mainMenu().setVisible(true); // Main Form to show after the Login Form..
+        }else{
+            JOptionPane.showMessageDialog(null, "Either the name of password is incorrect, try again.", "Wrong Login", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
      * @param args the command line arguments

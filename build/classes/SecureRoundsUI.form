@@ -145,16 +145,12 @@
               <ComponentRef name="usernameBox"/>
             </Property>
           </AccessibilityProperties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="usernameBoxActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="passwordBox">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Please enter a valid password."/>
           </Properties>
           <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Please enter a valid password."/>
             <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="passwordBox"/>
             </Property>
@@ -164,6 +160,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Submit"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="submitButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="quitButtom">
           <Properties>
