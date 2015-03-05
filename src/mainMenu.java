@@ -54,6 +54,11 @@ public class mainMenu extends javax.swing.JFrame {
         mapButton.setText("Hospital Map");
         mapButton.setMaximumSize(new java.awt.Dimension(169, 23));
         mapButton.setMinimumSize(new java.awt.Dimension(169, 23));
+        mapButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mapButtonActionPerformed(evt);
+            }
+        });
 
         incidentDB.setText("Incident Report DB");
         incidentDB.setMaximumSize(new java.awt.Dimension(169, 23));
@@ -152,6 +157,11 @@ public class mainMenu extends javax.swing.JFrame {
         this.setVisible(false);
         new SecureRoundsUI().setVisible(true);
     }//GEN-LAST:event_signoutButtonActionPerformed
+
+    private void mapButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mapButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_mapButtonActionPerformed
 
     /**
      * @param args the command line arguments
