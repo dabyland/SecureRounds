@@ -131,19 +131,22 @@ public class SecureRoundsUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void quitButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtomActionPerformed
+        // When the user clicks this button, the program will close
         System.exit(0);
     }//GEN-LAST:event_quitButtomActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        // Gets the text from the user and stores it in user and pass
         String user = usernameBox.getText();
         String pass = passwordBox.getText();       
-        
+        // Passwords for the admins
         if(user.contains("dbyland") && pass.contains("dbyland123") ||
                 user.contains("jcooper") && pass.contains("jcooper123") ||
                 user.contains("jmanno") && pass.contains("jmanno123") ||
                 user.contains("kvydra") && pass.contains("katya123")){
             this.setVisible(false);
             new mainMenu().setVisible(true); // Main Form to show after the Login Form..
+        // If the information is incorrect, this displays an error message
         }else{
             JOptionPane.showMessageDialog(null, "Either the name of password is incorrect, try again.", "Wrong Login", JOptionPane.ERROR_MESSAGE);
         }
