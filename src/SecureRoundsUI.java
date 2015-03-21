@@ -7,6 +7,9 @@ public class SecureRoundsUI extends javax.swing.JFrame {
         they will be tagged with their name which will be used
         to see who created a form. Allows for backtracking of who
         created the form */
+    
+    // Static variable that is associated to the class
+    // This is used in other classes to determine between user or admin
     public static String user;
     
     static String tagID;
@@ -142,9 +145,7 @@ public class SecureRoundsUI extends javax.swing.JFrame {
     }//GEN-LAST:event_quitButtomActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        // Gets the text from the user and stores it in user and pass
-        //user = usernameBox.getText();
-       // pass = passwordBox.getText();   
+        // Gets the text from the user and stores it in user and pass  
         user = (usernameBox.getText());
         String pass = (passwordBox.getText());
         // Passwords for the admins
@@ -154,13 +155,13 @@ public class SecureRoundsUI extends javax.swing.JFrame {
                 user.contains("kvydra") && pass.contains("katya123")){
             this.setVisible(false);
             new mainMenu().setVisible(true); // Main Form to show after the Login Form..
-        // If the information is incorrect, this displays an error message
+        // Password for users
         }
         else if(user.contains("guard") && pass.contains("guard123")){
             this.setVisible(false);
             new userMainMenu().setVisible(true);
         }
-        
+        // If the information is incorrect, this displays an error message
         else{
             JOptionPane.showMessageDialog(null, "Either the name or password is incorrect, try again.", "Wrong Login", JOptionPane.ERROR_MESSAGE);
         }
