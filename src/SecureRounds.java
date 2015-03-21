@@ -16,6 +16,7 @@ public class SecureRounds {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        // Creates an instance of the GUI
         SecureRoundsUI gui = new SecureRoundsUI();
         gui.setVisible(true);
     }

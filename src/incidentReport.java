@@ -452,8 +452,24 @@ public class incidentReport extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mainMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainMenuButtonActionPerformed
-        this.setVisible(false);
-        new mainMenu().setVisible(true);
+        // Grabs the current user name
+        String user = SecureRoundsUI.user;
+        // If the user is an admin
+        if(user.contains("dbyland")  ||
+                user.contains("jcooper")  ||
+                user.contains("jmanno")  ||
+                user.contains("kvydra") ){
+            // Displays the menu for admins
+            this.setVisible(false);
+            new mainMenu().setVisible(true); // Main Form to show after the Login Form..
+        // If the information is incorrect, this displays an error message
+        }
+        //Otherwise, display the menu for the users
+        else{
+            this.setVisible(false);
+            new userMainMenu().setVisible(true);
+        }
+        
     }//GEN-LAST:event_mainMenuButtonActionPerformed
 
     private void yesCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesCheckActionPerformed
