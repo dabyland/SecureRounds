@@ -153,6 +153,7 @@ public class userMainMenu extends javax.swing.JFrame {
 
     private void mapButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mapButtonActionPerformed
         // TODO add your handling code here:
+        new Map().setVisible(true);
 
     }//GEN-LAST:event_mapButtonActionPerformed
 
