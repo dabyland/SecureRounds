@@ -157,6 +157,7 @@ public class SecureRoundsUI extends javax.swing.JFrame {
             new mainMenu().setVisible(true); // Main Form to show after the Login Form..
 <<<<<<< HEAD
         }else{
+<<<<<<< HEAD
             JOptionPane.showMessageDialog(null, "Incorrect login information, please try again.", "Wrong Login", JOptionPane.ERROR_MESSAGE);
 =======
         // Password for users
@@ -169,6 +170,9 @@ public class SecureRoundsUI extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(null, "Either the name or password is incorrect, try again.", "Wrong Login", JOptionPane.ERROR_MESSAGE);
 >>>>>>> origin/master
+=======
+            JOptionPane.showMessageDialog(null, "Either the name of password is incorrect, try again.", "Wrong Login", JOptionPane.ERROR_MESSAGE);
+>>>>>>> parent of aa00b12... Uncommitted changes, syncing new.
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 
