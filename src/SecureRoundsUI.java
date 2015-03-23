@@ -145,7 +145,7 @@ public class SecureRoundsUI extends javax.swing.JFrame {
             this.setVisible(false);
             new mainMenu().setVisible(true); // Main Form to show after the Login Form..
         }else{
-            JOptionPane.showMessageDialog(null, "Either the name of password is incorrect, try again.", "Wrong Login", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Incorrect login information, please try again.", "Wrong Login", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 
