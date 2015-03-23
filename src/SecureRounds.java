@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package securerounds;
+
 
 /**
  *
@@ -16,6 +16,9 @@ public class SecureRounds {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        // Creates an instance of the GUI
+        SecureRoundsUI gui = new SecureRoundsUI();
+        gui.setVisible(true);
     }
     
 }

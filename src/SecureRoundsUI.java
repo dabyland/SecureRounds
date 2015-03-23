@@ -7,13 +7,22 @@ public class SecureRoundsUI extends javax.swing.JFrame {
         they will be tagged with their name which will be used
         to see who created a form. Allows for backtracking of who
         created the form */
+    
+    // Static variable that is associated to the class
+    // This is used in other classes to determine between user or admin
+    public static String user;
+    
     static String tagID;
     /**
      * Creates new form SecureRoundsUI
      */
     public SecureRoundsUI() {
         initComponents();
+        // Sets the login screen to load in the center of the screen
+        this.setLocationRelativeTo(null);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,21 +140,35 @@ public class SecureRoundsUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void quitButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtomActionPerformed
+        // When the user clicks this button, the program will close
         System.exit(0);
     }//GEN-LAST:event_quitButtomActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        String user = usernameBox.getText();
-        String pass = passwordBox.getText();       
-        
+        // Gets the text from the user and stores it in user and pass  
+        user = (usernameBox.getText());
+        String pass = (passwordBox.getText());
+        // Passwords for the admins
         if(user.contains("dbyland") && pass.contains("dbyland123") ||
                 user.contains("jcooper") && pass.contains("jcooper123") ||
                 user.contains("jmanno") && pass.contains("jmanno123") ||
                 user.contains("kvydra") && pass.contains("katya123")){
             this.setVisible(false);
             new mainMenu().setVisible(true); // Main Form to show after the Login Form..
+<<<<<<< HEAD
         }else{
             JOptionPane.showMessageDialog(null, "Incorrect login information, please try again.", "Wrong Login", JOptionPane.ERROR_MESSAGE);
+=======
+        // Password for users
+        }
+        else if(user.contains("guard") && pass.contains("guard123")){
+            this.setVisible(false);
+            new userMainMenu().setVisible(true);
+        }
+        // If the information is incorrect, this displays an error message
+        else{
+            JOptionPane.showMessageDialog(null, "Either the name or password is incorrect, try again.", "Wrong Login", JOptionPane.ERROR_MESSAGE);
+>>>>>>> origin/master
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 
@@ -175,7 +198,7 @@ public class SecureRoundsUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(SecureRoundsUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
