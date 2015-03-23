@@ -92,6 +92,11 @@ public class incidentReport extends javax.swing.JFrame {
         });
 
         mapButton.setText("Map");
+        mapButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mapButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("Incident Report Form");
@@ -495,6 +500,11 @@ public class incidentReport extends javax.swing.JFrame {
         // Need to implement this function
         // This will allow the user to reset the text boxes
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void mapButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mapButtonActionPerformed
+        // Display the map
+        new Map().setVisible(true);
+    }//GEN-LAST:event_mapButtonActionPerformed
 
     /**
      * @param args the command line arguments

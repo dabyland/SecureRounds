@@ -167,8 +167,8 @@ public class mainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_signoutButtonActionPerformed
 
     private void mapButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mapButtonActionPerformed
-        // TODO add your handling code here:
-        
+        //Display the map
+        new Map().setVisible(true);
     }//GEN-LAST:event_mapButtonActionPerformed
 
     /**
