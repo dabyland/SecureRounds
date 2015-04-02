@@ -42,18 +42,21 @@ public class SecureRoundsUI extends javax.swing.JFrame {
         passwordBox = new javax.swing.JPasswordField();
         submitButton = new javax.swing.JButton();
         quitButtom = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Stencil", 1, 36)); // NOI18N
         jLabel1.setText("Secure Rounds");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
         jLabel2.setText("Username");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
         jLabel3.setText("Password");
 
         usernameBox.setToolTipText("Please enter a valid username.");
@@ -61,6 +64,7 @@ public class SecureRoundsUI extends javax.swing.JFrame {
 
         passwordBox.setToolTipText("Please enter a valid password.");
 
+        submitButton.setBackground(new java.awt.Color(255, 255, 255));
         submitButton.setText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,6 +72,7 @@ public class SecureRoundsUI extends javax.swing.JFrame {
             }
         });
 
+        quitButtom.setBackground(new java.awt.Color(255, 255, 255));
         quitButtom.setText("Quit");
         quitButtom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,29 +80,35 @@ public class SecureRoundsUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Picture1.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(158, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(135, 135, 135))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(61, 61, 61)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(usernameBox))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(passwordBox)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                                    .addComponent(quitButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(jLabel1))
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(usernameBox))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(passwordBox)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                                .addComponent(quitButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,11 +123,12 @@ public class SecureRoundsUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passwordBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(quitButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                    .addComponent(quitButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLabel1.getAccessibleContext().setAccessibleParent(jLabel1);
@@ -129,11 +141,11 @@ public class SecureRoundsUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -145,30 +157,30 @@ public class SecureRoundsUI extends javax.swing.JFrame {
     }//GEN-LAST:event_quitButtomActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        // Gets the text from the user and stores it in user and pass  
+        // Gets the text from the user and stores it in user and pass
         user = (usernameBox.getText());
         String pass = (passwordBox.getText());
         // Passwords for the admins
         if(user.contains("dbyland") && pass.contains("dbyland123") ||
-                user.contains("jcooper") && pass.contains("jcooper123") ||
-                user.contains("jmanno") && pass.contains("jmanno123") ||
-                user.contains("kvydra") && pass.contains("katya123")){
+            user.contains("jcooper") && pass.contains("jcooper123") ||
+            user.contains("jmanno") && pass.contains("jmanno123") ||
+            user.contains("kvydra") && pass.contains("katya123")){
             this.setVisible(false);
-            new mainMenu().setVisible(true); // Main Form to show after the Login Form..
-//<<<<<<< HEAD
+            new adminUserMenu().setVisible(true); // Main Form to show after the Login Form..
+            //<<<<<<< HEAD
         }
         else if(user.contains("guard") && pass.contains("guard123")){
             this.setVisible(false);
             new userMainMenu().setVisible(true);
         }
         else{
-//<<<<<<< HEAD
+            //<<<<<<< HEAD
             JOptionPane.showMessageDialog(null, "Incorrect login information, please try again.", "Wrong Login", JOptionPane.ERROR_MESSAGE);
-//=======
-        // Password for users
+            //=======
+            // Password for users
         }
         // If the information is incorrect, this displays an error message
-        
+
     }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
@@ -210,6 +222,7 @@ public class SecureRoundsUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField passwordBox;

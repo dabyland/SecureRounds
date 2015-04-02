@@ -251,7 +251,7 @@ public class missingReport extends javax.swing.JFrame {
                 user.contains("jmanno") ||
                 user.contains("kvydra") ){
             this.setVisible(false); // hide report form
-            new mainMenu().setVisible(true); // display admin menu
+            new adminUserMenu().setVisible(true); // display admin menu
         }
         // Else, display menu for employees/users
         else{

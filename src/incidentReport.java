@@ -81,6 +81,7 @@ public class incidentReport extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setForeground(java.awt.Color.white);
         setResizable(false);
 
@@ -472,7 +473,7 @@ public class incidentReport extends javax.swing.JFrame {
                 user.contains("kvydra") ){
             // Displays the menu for admins
             this.setVisible(false);
-            new mainMenu().setVisible(true); // Main Form to show after the Login Form..
+            new adminUserMenu().setVisible(true); // Main Form to show after the Login Form..
         // If the information is incorrect, this displays an error message
         }
         //Otherwise, display the menu for the users
