@@ -38,6 +38,11 @@ public class mainMenu extends javax.swing.JFrame {
         missingForm.setMaximumSize(new java.awt.Dimension(169, 23));
         missingForm.setMinimumSize(new java.awt.Dimension(169, 23));
         missingForm.setPreferredSize(new java.awt.Dimension(169, 23));
+        missingForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                missingFormActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel2.setText("Main Menu");
@@ -170,6 +175,11 @@ public class mainMenu extends javax.swing.JFrame {
         //Display the map
         new Map().setVisible(true);
     }//GEN-LAST:event_mapButtonActionPerformed
+    // Display missing report form.
+    private void missingFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_missingFormActionPerformed
+        this.setVisible(false);
+        new missingReport().setVisible(true);
+    }//GEN-LAST:event_missingFormActionPerformed
 
     /**
      * @param args the command line arguments
