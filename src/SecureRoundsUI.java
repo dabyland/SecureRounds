@@ -155,24 +155,24 @@ public class SecureRoundsUI extends javax.swing.JFrame {
                 user.contains("kvydra") && pass.contains("katya123")){
             this.setVisible(false);
             new mainMenu().setVisible(true); // Main Form to show after the Login Form..
-<<<<<<< HEAD
+//<<<<<<< HEAD
         }else{
-<<<<<<< HEAD
+//<<<<<<< HEAD
             JOptionPane.showMessageDialog(null, "Incorrect login information, please try again.", "Wrong Login", JOptionPane.ERROR_MESSAGE);
-=======
+//=======
         // Password for users
         }
-        else if(user.contains("guard") && pass.contains("guard123")){
+        if(user.contains("guard") && pass.contains("guard123")){
             this.setVisible(false);
             new userMainMenu().setVisible(true);
         }
         // If the information is incorrect, this displays an error message
         else{
             JOptionPane.showMessageDialog(null, "Either the name or password is incorrect, try again.", "Wrong Login", JOptionPane.ERROR_MESSAGE);
->>>>>>> origin/master
-=======
+//>>>>>>> origin/master
+//=======
             JOptionPane.showMessageDialog(null, "Either the name of password is incorrect, try again.", "Wrong Login", JOptionPane.ERROR_MESSAGE);
->>>>>>> parent of aa00b12... Uncommitted changes, syncing new.
+//>>>>>>> parent of aa00b12... Uncommitted changes, syncing new.
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 

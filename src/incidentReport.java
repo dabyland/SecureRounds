@@ -109,6 +109,12 @@ public class incidentReport extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Unit:");
 
+        unitField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                unitFieldActionPerformed(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Room #:");
 
@@ -505,6 +511,10 @@ public class incidentReport extends javax.swing.JFrame {
         // Display the map
         new Map().setVisible(true);
     }//GEN-LAST:event_mapButtonActionPerformed
+
+    private void unitFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unitFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_unitFieldActionPerformed
 
     /**
      * @param args the command line arguments
