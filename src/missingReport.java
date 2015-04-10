@@ -14,6 +14,7 @@ public class missingReport extends javax.swing.JFrame {
      * Creates new form missingReport
      */
     public missingReport() {
+        super("Secure Rounds");
         initComponents();
     }
 
