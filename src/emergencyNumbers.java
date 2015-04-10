@@ -14,6 +14,7 @@ public class emergencyNumbers extends javax.swing.JFrame {
      * Creates new form emergencyNumbers
      */
     public emergencyNumbers() {
+        super("Secure Rounds");
         initComponents();
     }
 

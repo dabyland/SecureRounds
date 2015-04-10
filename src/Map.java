@@ -14,6 +14,7 @@ public class Map extends javax.swing.JFrame {
      * Creates new form Map
      */
     public Map() {
+        super("Secure Rounds");
         initComponents();
     }
 

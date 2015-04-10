@@ -16,7 +16,8 @@ public class userMainMenu extends javax.swing.JFrame {
     /**
      * Creates new form userMainMenu
      */
-    public userMainMenu() {       
+    public userMainMenu() {     
+        super("Secure Rounds");
         initComponents();
         
     }

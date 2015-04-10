@@ -3,7 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Danny
@@ -14,6 +20,7 @@ public class incidentReport extends javax.swing.JFrame {
      * Creates new form incidentReport
      */
     public incidentReport() {
+        super("Secure Rounds");
         initComponents();
     }
 
@@ -60,7 +67,6 @@ public class incidentReport extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         additionalInfoField = new javax.swing.JTextArea();
         jLabel16 = new javax.swing.JLabel();
-        timeField = new javax.swing.JTextField();
         yesCheck = new javax.swing.JCheckBox();
         jLabel17 = new javax.swing.JLabel();
         noCheck = new javax.swing.JCheckBox();
@@ -79,6 +85,8 @@ public class incidentReport extends javax.swing.JFrame {
         officerNumberField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        timeField = new javax.swing.JFormattedTextField();
+        dateField = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -169,8 +177,6 @@ public class incidentReport extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setText("Time of Incident: ");
 
-        timeField.setToolTipText("Format: HH:MM AM/PM");
-
         yesCheck.setText("Yes");
         yesCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,6 +187,7 @@ public class incidentReport extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel17.setText("Police Contacted?: ");
 
+        noCheck.setSelected(true);
         noCheck.setText("No");
         noCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,6 +229,11 @@ public class incidentReport extends javax.swing.JFrame {
             }
         });
 
+        timeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance())));
+
+        dateField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        dateField.setToolTipText("Date Format: MM, DD, YYYY or MM, DD, YY or Month, DD, YYYY");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -256,15 +268,6 @@ public class incidentReport extends javax.swing.JFrame {
             .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jSeparator8, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(248, 248, 248))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addGap(185, 185, 185))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,7 +275,7 @@ public class incidentReport extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(unitField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(roomField, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,23 +302,19 @@ public class incidentReport extends javax.swing.JFrame {
                                 .addComponent(emailField)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(activityComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(incidentLocationField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 306, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel12)
+                                .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(activityComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel16)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(timeField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel14))))
+                                .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(timeField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel19)
@@ -358,7 +357,20 @@ public class incidentReport extends javax.swing.JFrame {
                                 .addComponent(jLabel23)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(officerNumberField)))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(incidentLocationField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(249, 249, 249)
+                .addComponent(jLabel11)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addGap(185, 185, 185))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -410,16 +422,17 @@ public class incidentReport extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(activityComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
+                    .addComponent(jLabel14)
+                    .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(incidentLocationField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(timeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,7 +465,7 @@ public class incidentReport extends javax.swing.JFrame {
                     .addComponent(officerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23)
                     .addComponent(officerNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -497,17 +510,78 @@ public class incidentReport extends javax.swing.JFrame {
     }//GEN-LAST:event_noCheckActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+<<<<<<< HEAD
         // TODO add your handling code here:
         // Need to implement this function
         
         
         // This will allow the user to submit the information to the database
+=======
+        // SUBMIT BUTTON:
+        //     Connect to DB, store all info
+        
+        // Trim and strip all non-needed characters and spaces in current string to store into database
+        // TODO: GET DATE INFO FROM "DATE OF INCIDENT"
+        String fullName = fullNameField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String phoneNum = phoneNumberField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String unit = unitField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String room = roomField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String address = addressField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String email = emailField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String incidentLoc = incidentLocationField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String date = null;
+        String info = additionalInfoField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String yes = yesCheck.getText();
+        String no = noCheck.getText();
+        String station = stationField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String stationAddress = stationAddressField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String stationNum = stationNumberField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String officerName = officerNameField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String officerNum = officerNumberField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String time = timeField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';,", "");
+        String activity = activityComboBox.getSelectedItem().toString();
+        
+        Connection connection = null;
+        Statement stmt = null;
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");	
+            Connection conn = DriverManager.getConnection
+              ("jdbc:sqlserver://localhost:1433;databaseName=SecureRounds;user=sa;password=admin;database=SecureRounds");
+            System.out.println("Connection Successful");
+            Statement sta = conn.createStatement();
+            sta.execute("INSERT INTO incidentMaster (Unit, Room, fullName, phoneNumber,"
+                    + "Address, Email, Activity, incidentLocation, incidentDate, incidentTime,"
+                    + "additionalInfo, policeStation, policeNumber, policeAddress, officerName, officerNumber) "
+                    + "VALUES ('"+unit+"','"+room+"','"+fullName+"','"+phoneNum+"','"+address+"','"+email+"',"
+                    + "'"+activity+"','"+incidentLoc+"','"+date+"','"+time+"','"+info+"','"+station+"',"
+                    + "'"+stationNum+"','"+stationAddress+"','"+officerName+"','"+officerNum+"');");
+        } catch (SQLException err){
+            System.out.println(err.getMessage());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(incidentReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+>>>>>>> origin/master
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /** Resets all fields within the form **/
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        // Need to implement this function
-        // This will allow the user to reset the text boxes
+        unitField.setText("");
+        roomField.setText("");
+        fullNameField.setText("");
+        phoneNumberField.setText("");
+        addressField.setText("");
+        emailField.setText("");
+        incidentLocationField.setText("");
+        additionalInfoField.setText("");
+        yesCheck.setSelected(false);
+        noCheck.setSelected(true);
+        stationField.setText("");
+        stationAddressField.setText("");
+        stationNumberField.setText("");
+        officerNumberField.setText("");
+        officerNameField.setText("");
+        activityComboBox.setSelectedIndex(0);
+        timeField.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void mapButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mapButtonActionPerformed
@@ -558,6 +632,7 @@ public class incidentReport extends javax.swing.JFrame {
     private javax.swing.JComboBox activityComboBox;
     private javax.swing.JTextArea additionalInfoField;
     private javax.swing.JTextField addressField;
+    private javax.swing.JFormattedTextField dateField;
     private javax.swing.JTextField emailField;
     private javax.swing.JTextField fullNameField;
     private javax.swing.JTextField incidentLocationField;
@@ -605,7 +680,7 @@ public class incidentReport extends javax.swing.JFrame {
     private javax.swing.JTextField stationAddressField;
     private javax.swing.JTextField stationField;
     private javax.swing.JTextField stationNumberField;
-    private javax.swing.JTextField timeField;
+    private javax.swing.JFormattedTextField timeField;
     private javax.swing.JTextField unitField;
     private javax.swing.JCheckBox yesCheck;
     // End of variables declaration//GEN-END:variables

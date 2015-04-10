@@ -6,6 +6,7 @@ public class mainMenu extends javax.swing.JFrame {
      * Creates new form mainMenu
      */
     public mainMenu() {
+        super("Secure Rounds");
         initComponents();
     }
 

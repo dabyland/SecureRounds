@@ -17,6 +17,7 @@ public class SecureRoundsUI extends javax.swing.JFrame {
      * Creates new form SecureRoundsUI
      */
     public SecureRoundsUI() {
+        super("Secure Rounds");
         initComponents();
         // Sets the login screen to load in the center of the screen
         this.setLocationRelativeTo(null);
