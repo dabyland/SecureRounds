@@ -23,6 +23,26 @@ public class incidentReport extends javax.swing.JFrame {
         super("Secure Rounds");
         initComponents();
     }
+    
+    public void resetFields(){
+                unitField.setText("");
+        roomField.setText("");
+        fullNameField.setText("");
+        phoneNumberField.setText("");
+        addressField.setText("");
+        emailField.setText("");
+        incidentLocationField.setText("");
+        additionalInfoField.setText("Please enter any information in regards to the incident.");
+        yesCheck.setSelected(false);
+        noCheck.setSelected(true);
+        stationField.setText("");
+        stationAddressField.setText("");
+        stationNumberField.setText("");
+        officerNumberField.setText("");
+        officerNameField.setText("");
+        activityComboBox.setSelectedIndex(0);
+        timeField.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -510,13 +530,12 @@ public class incidentReport extends javax.swing.JFrame {
     }//GEN-LAST:event_noCheckActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-<<<<<<< HEAD
+
         // TODO add your handling code here:
         // Need to implement this function
         
         
         // This will allow the user to submit the information to the database
-=======
         // SUBMIT BUTTON:
         //     Connect to DB, store all info
         
@@ -529,7 +548,7 @@ public class incidentReport extends javax.swing.JFrame {
         String address = addressField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String email = emailField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String incidentLoc = incidentLocationField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
-        String date = null;
+        String date = "1/1/15"; // Testing
         String info = additionalInfoField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String yes = yesCheck.getText();
         String no = noCheck.getText();
@@ -538,16 +557,14 @@ public class incidentReport extends javax.swing.JFrame {
         String stationNum = stationNumberField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String officerName = officerNameField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String officerNum = officerNumberField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
-        String time = timeField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';,", "");
+        String time = "1:00PM"; // Testing
         String activity = activityComboBox.getSelectedItem().toString();
         
-        Connection connection = null;
-        Statement stmt = null;
+        
         try{
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");	
-            Connection conn = DriverManager.getConnection
-              ("jdbc:sqlserver://localhost:1433;databaseName=SecureRounds;user=sa;password=admin;database=SecureRounds");
             System.out.println("Connection Successful");
+            // Grab the connection
+            Connection conn = DBConnect.getConnection();
             Statement sta = conn.createStatement();
             sta.execute("INSERT INTO incidentMaster (Unit, Room, fullName, phoneNumber,"
                     + "Address, Email, Activity, incidentLocation, incidentDate, incidentTime,"
@@ -555,33 +572,23 @@ public class incidentReport extends javax.swing.JFrame {
                     + "VALUES ('"+unit+"','"+room+"','"+fullName+"','"+phoneNum+"','"+address+"','"+email+"',"
                     + "'"+activity+"','"+incidentLoc+"','"+date+"','"+time+"','"+info+"','"+station+"',"
                     + "'"+stationNum+"','"+stationAddress+"','"+officerName+"','"+officerNum+"');");
+             //Close the connection
+            conn.close();
         } catch (SQLException err){
             System.out.println(err.getMessage());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(incidentReport.class.getName()).log(Level.SEVERE, null, ex);
         }
->>>>>>> origin/master
+        
+        // After submitting to the DB -- reset the fields
+        resetFields();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /** Resets all fields within the form **/
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        unitField.setText("");
-        roomField.setText("");
-        fullNameField.setText("");
-        phoneNumberField.setText("");
-        addressField.setText("");
-        emailField.setText("");
-        incidentLocationField.setText("");
-        additionalInfoField.setText("");
-        yesCheck.setSelected(false);
-        noCheck.setSelected(true);
-        stationField.setText("");
-        stationAddressField.setText("");
-        stationNumberField.setText("");
-        officerNumberField.setText("");
-        officerNameField.setText("");
-        activityComboBox.setSelectedIndex(0);
-        timeField.setText("");
+
+        resetFields();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void mapButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mapButtonActionPerformed
