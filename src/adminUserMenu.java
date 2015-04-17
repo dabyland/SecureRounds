@@ -84,6 +84,11 @@ public class adminUserMenu extends javax.swing.JFrame {
         incidentDB.setMaximumSize(new java.awt.Dimension(169, 23));
         incidentDB.setMinimumSize(new java.awt.Dimension(169, 23));
         incidentDB.setPreferredSize(new java.awt.Dimension(169, 23));
+        incidentDB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                incidentDBActionPerformed(evt);
+            }
+        });
 
         missingDB.setBackground(new java.awt.Color(255, 255, 255));
         missingDB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/verification5.png"))); // NOI18N
@@ -236,6 +241,12 @@ public class adminUserMenu extends javax.swing.JFrame {
         this.setVisible(false);
         new SecureRoundsUI().setVisible(true);
     }//GEN-LAST:event_signoutButtonActionPerformed
+
+    private void incidentDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_incidentDBActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new displayIncidentReportRecords().setVisible(true);
+    }//GEN-LAST:event_incidentDBActionPerformed
 
     /**
      * @param args the command line arguments

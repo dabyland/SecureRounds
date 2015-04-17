@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Danny
@@ -541,6 +542,7 @@ public class incidentReport extends javax.swing.JFrame {
         
         // Trim and strip all non-needed characters and spaces in current string to store into database
         // TODO: GET DATE INFO FROM "DATE OF INCIDENT"
+        
         String fullName = fullNameField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String phoneNum = phoneNumberField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String unit = unitField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
@@ -548,11 +550,7 @@ public class incidentReport extends javax.swing.JFrame {
         String address = addressField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String email = emailField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String incidentLoc = incidentLocationField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
-<<<<<<< HEAD
-        String date = "01/01/2015";
-=======
         String date = "1/1/15"; // Testing
->>>>>>> origin/master
         String info = additionalInfoField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String yes = yesCheck.getText();
         String no = noCheck.getText();
@@ -561,14 +559,11 @@ public class incidentReport extends javax.swing.JFrame {
         String stationNum = stationNumberField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String officerName = officerNameField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String officerNum = officerNumberField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
-<<<<<<< HEAD
-        String time = "1:15";
-=======
         String time = "1:00PM"; // Testing
->>>>>>> origin/master
         String activity = activityComboBox.getSelectedItem().toString();
         
-        
+        if(fullName == null || phoneNum == null || unit == null || room == null 
+                || address == null || email == null || incidentLoc == null){
         try{
             System.out.println("Connection Successful");
             // Grab the connection
@@ -590,6 +585,11 @@ public class incidentReport extends javax.swing.JFrame {
         
         // After submitting to the DB -- reset the fields
         resetFields();
+        JOptionPane.showMessageDialog(null, "Success!", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "You must enter values for the text boxes!", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
