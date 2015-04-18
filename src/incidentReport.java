@@ -549,7 +549,7 @@ public class incidentReport extends javax.swing.JFrame {
         String address = addressField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String email = emailField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String incidentLoc = incidentLocationField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
-        String date = "1/1/15"; // Testing
+        String date =  dateField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String info = additionalInfoField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String yes = yesCheck.getText();
         String no = noCheck.getText();
@@ -558,7 +558,7 @@ public class incidentReport extends javax.swing.JFrame {
         String stationNum = stationNumberField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String officerName = officerNameField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String officerNum = officerNumberField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
-        String time = "1:00PM"; // Testing
+        String time =  timeField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", ""); // Testing
         String activity = activityComboBox.getSelectedItem().toString();
         
         

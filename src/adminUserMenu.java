@@ -93,6 +93,11 @@ public class adminUserMenu extends javax.swing.JFrame {
         missingDB.setBackground(new java.awt.Color(255, 255, 255));
         missingDB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/verification5.png"))); // NOI18N
         missingDB.setText("Missing Equipment Records");
+        missingDB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                missingDBActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/emergency7.png"))); // NOI18N
@@ -247,6 +252,12 @@ public class adminUserMenu extends javax.swing.JFrame {
         this.setVisible(false);
         new displayIncidentReportRecords().setVisible(true);
     }//GEN-LAST:event_incidentDBActionPerformed
+
+    private void missingDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_missingDBActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new displayMissingReportRecords().setVisible(true);
+    }//GEN-LAST:event_missingDBActionPerformed
 
     /**
      * @param args the command line arguments

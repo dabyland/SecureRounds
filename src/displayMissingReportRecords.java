@@ -27,12 +27,12 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
  
 
     JFrame frame1;
-
+    JPanel buttonPanel;
     JLabel recordLabel, selectDateLabel, l2;
 
     JComboBox c1;
 
-    JButton b1;
+    JButton b1, backButton, backButton2;
 
     Connection con;
 
@@ -46,9 +46,8 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
 
     static JTable table;
 
-    String[] columnNames = {"Unit", "Room", "fullName", "phoneNumber", "Address", "Email", "Activity",
-                "incidentLocation", "incidentTime", "additionalInfo", "policeStation",
-                "policeNumber", "policeAddress", "officerName", "officerNumber"};
+    String[] columnNames = {"Unit", "Room", "missingItem", "itemDescription", "fullName", "phoneNumber", "Address",
+                "Email"};
 
     String date;
 
@@ -77,10 +76,15 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
         b1.setBounds(150, 150, 150, 20);
 
         b1.addActionListener(this);
+        
+       backButton = new JButton();
+       backButton.addActionListener(this);
+       backButton.setText("Back");
+       backButton.setBounds(150, 200, 150, 20);
 
  
 
-        setTitle("Incident Report Records");
+        setTitle("Missing Report Records");
 
         setLayout(null);
 
@@ -98,13 +102,15 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
         add(selectDateLabel);;
 
         add(b1);
+        
+        add(backButton);
 
         try {
         
             con = DBConnect.getConnection();
             st = con.createStatement();
 
-            rs = st.executeQuery("select incidentDate from incidentMaster");
+            rs = st.executeQuery("select missingDate from missingMaster");
 
             Vector v = new Vector();
 
@@ -142,6 +148,14 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
             showTableData();
 
         }
+        if(ae.getSource() == backButton){
+            this.setVisible(false);
+            new adminUserMenu().setVisible(true);
+        }
+        
+        if(ae.getSource() == backButton2){
+            frame1.setVisible(false);
+        }
     }
 
  
@@ -149,28 +163,25 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
     public void showTableData() {
 
  
-//        JPanel buttonPanel = new JPanel();
-//        //buttonPanel.setBounds(800, 800, 200, 100);
-//        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));;
-//        JButton backButton = new JButton();
-//        backButton.setText("Back");
-//        backButton.setBounds(60, 400, 220, 30);
-//        buttonPanel.add(backButton);
+       buttonPanel = new JPanel();
+       buttonPanel.setBounds(800, 800, 200, 100);
+       buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+       backButton2 = new JButton();
+       backButton2.setText("Back");
+       backButton2.setBounds(60, 400, 220, 30);
+       buttonPanel.add(backButton2);
         
         frame1 = new JFrame("Database Search Result");
         
-        frame1.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent evt) {
-                frame1.setVisible(false);
-            }
-        });
+        frame1.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
         frame1.setLayout(new BorderLayout());
         
         frame1.setLocationRelativeTo(null);
         
-        //frame1.add(buttonPanel, BorderLayout.SOUTH);
+        frame1.add(buttonPanel, BorderLayout.SOUTH);
+        backButton2.addActionListener(this);
+        
 
         DefaultTableModel model = new DefaultTableModel();
 
@@ -200,15 +211,14 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
         date = (String) c1.getSelectedItem();
 
         // Variables to hold data from Database
-        String Unit, Room, fullName, phoneNumber, Address, Email, Activity,
-                incidentLocation, incidentTime, additionalInfo, policeStation,
-                policeNumber, policeAddress, officerName, officerNumber;
+        String Unit, Room, missingItem, missingDate, itemDescription, fullName, phoneNumber,
+                Address, Email;
 
  
 
         try {
 
-            pst = con.prepareStatement("select * from incidentMaster where incidentDate='" + date + "'");
+            pst = con.prepareStatement("select * from missingMaster where missingDate='" + date + "'");
 
             ResultSet rs = pst.executeQuery();
 
@@ -220,37 +230,24 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
 
                 Room = rs.getString("Room");
 
+                missingItem = rs.getString("missingItem");
+
+                missingDate = rs.getString("missingDate");
+                
+                itemDescription = rs.getString("itemDescription");
+
                 fullName = rs.getString("fullName");
 
                 phoneNumber = rs.getString("phoneNumber");
-                
-                Address = rs.getString("Address");
 
+                Address = rs.getString("Address");
+                
                 Email = rs.getString("Email");
 
-                Activity = rs.getString("Activity");
+              
 
-                incidentLocation = rs.getString("incidentLocation");
-                
-                incidentTime = rs.getString("incidentTime");
-
-                additionalInfo = rs.getString("additionalInfo");
-
-                policeStation = rs.getString("policeStation");
-
-                policeNumber = rs.getString("policeNumber");
-                
-                policeAddress = rs.getString("policeAddress");
-
-                officerName = rs.getString("officerName");
-
-                Activity = rs.getString("Activity");
-
-                officerNumber = rs.getString("officerNumber");
-
-                model.addRow(new Object[]{Unit, Room, fullName, phoneNumber, Address, Email, Activity,
-                incidentLocation, incidentTime, additionalInfo, policeStation,
-                policeNumber, policeAddress, officerName, officerNumber});
+                model.addRow(new Object[]{Unit, Room, fullName, missingItem, missingDate, itemDescription, fullName,
+                phoneNumber, Address, Email});
 
                 i++;
 
@@ -282,7 +279,7 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
 
         frame1.setVisible(true);
 
-        frame1.setSize(300, 300);
+        frame1.setSize(800, 300);
         
         frame1.setLocationRelativeTo(null);
 
