@@ -74,6 +74,7 @@ public class missingReport extends javax.swing.JFrame {
         phoneTextField = new javax.swing.JTextField();
         submitButton = new javax.swing.JButton();
         clearButton = new javax.swing.JButton();
+        missingDateText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,7 +110,7 @@ public class missingReport extends javax.swing.JFrame {
 
         missingText.setText("Name of missing item:");
 
-        seenText.setText("Last Seen:");
+        seenText.setText("Date:");
 
         missingItemDesc.setText("Description of missing item:");
 
@@ -189,11 +190,12 @@ public class missingReport extends javax.swing.JFrame {
                                 .addComponent(roomField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(missingText)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(missingItem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(seenText))
+                                    .addComponent(missingText)
+                                    .addComponent(seenText, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(missingItem, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(missingDateText))
                                 .addGap(56, 56, 56)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -254,7 +256,9 @@ public class missingReport extends javax.swing.JFrame {
                     .addComponent(missingItemDesc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(seenText)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(seenText)
+                        .addComponent(missingDateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -330,19 +334,19 @@ public class missingReport extends javax.swing.JFrame {
         String address = addressTextField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String email = emailTextField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String missingItemInput = missingItem.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String missingDate = missingDateText.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String additionalInfo = missingTextArea.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         
-         if(fullName == null || phoneNum == null || unit == null || room == null 
-                || address == null || email == null || missingItemInput == null){
+         
         try{
             System.out.println("Connection Successful");
             // Grab the connection
             Connection conn = DBConnect.getConnection();
             Statement sta = conn.createStatement();
-            sta.execute("INSERT INTO incidentMaster (Unit, Room, fullName, phoneNumber,"
-                    + "Address, Email, missingItem, additionalInfo) "
-                    + "VALUES ('"+unit+"','"+room+"','"+fullName+"','"+phoneNum+"','"+address+"','"+email+"',"
-                    + "'"+missingItemInput+"','"+additionalInfo+"');");
+            sta.execute("INSERT INTO missingMaster (Unit, Room, missingItem, missingDate, itemDescription,"
+                    + "fullName, phoneNumber, Address, Email) "
+                    + "VALUES ('"+unit+"','"+room+"','"+missingItemInput+"','"+missingDate+"','"+additionalInfo+"','"+fullName+"',"
+                    + "'"+phoneNum+"','"+address+"','"+email+"');");
              //Close the connection
             conn.close();
         } catch (SQLException err){
@@ -353,11 +357,8 @@ public class missingReport extends javax.swing.JFrame {
         
         // After submitting to the DB -- reset the fields
         clearFields();
-        JOptionPane.showMessageDialog(null, "Success!", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "You must enter values for the text boxes!", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
+        
+        
     }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
@@ -409,6 +410,7 @@ public class missingReport extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JButton mapButton;
     private javax.swing.JButton menuButton;
+    private javax.swing.JTextField missingDateText;
     private javax.swing.JTextField missingItem;
     private javax.swing.JLabel missingItemDesc;
     private javax.swing.JLabel missingText;

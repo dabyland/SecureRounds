@@ -63,12 +63,13 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="missingText" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="missingItem" min="-2" pref="100" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="seenText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="missingText" min="-2" max="-2" attributes="0"/>
+                                  <Component id="seenText" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="missingItem" pref="100" max="32767" attributes="0"/>
+                                  <Component id="missingDateText" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -150,7 +151,10 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="seenText" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="seenText" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="missingDateText" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Component id="jScrollPane1" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -246,7 +250,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="seenText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Last Seen:"/>
+        <Property name="text" type="java.lang.String" value="Date:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="missingItemDesc">
@@ -330,6 +334,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="missingDateText">
     </Component>
   </SubComponents>
 </Form>

@@ -561,8 +561,7 @@ public class incidentReport extends javax.swing.JFrame {
         String time = "1:00PM"; // Testing
         String activity = activityComboBox.getSelectedItem().toString();
         
-        if(fullName == null || phoneNum == null || unit == null || room == null 
-                || address == null || email == null || incidentLoc == null){
+        
         try{
             System.out.println("Connection Successful");
             // Grab the connection
@@ -585,10 +584,7 @@ public class incidentReport extends javax.swing.JFrame {
         // After submitting to the DB -- reset the fields
         resetFields();
         JOptionPane.showMessageDialog(null, "Success!", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "You must enter values for the text boxes!", "Error", JOptionPane.INFORMATION_MESSAGE);
-        }
+        
         
     }//GEN-LAST:event_submitButtonActionPerformed
 
