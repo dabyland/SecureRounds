@@ -1,3 +1,11 @@
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,6 +26,16 @@ public class missingReport extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void clearFields(){
+        unitTextField.setText("");
+        roomField.setText("");
+        missingItem.setText("");
+        missingTextArea.setText("Basic description of missing item...");
+        nameTextField.setText("");
+        phoneTextField.setText("");
+        addressTextField.setText("");
+        emailTextField.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,7 +56,7 @@ public class missingReport extends javax.swing.JFrame {
         roomField = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         missingText = new javax.swing.JLabel();
-        missingField = new javax.swing.JTextField();
+        missingItem = new javax.swing.JTextField();
         seenText = new javax.swing.JLabel();
         missingItemDesc = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -54,6 +72,8 @@ public class missingReport extends javax.swing.JFrame {
         addressTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
         phoneTextField = new javax.swing.JTextField();
+        submitButton = new javax.swing.JButton();
+        clearButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,6 +137,20 @@ public class missingReport extends javax.swing.JFrame {
             }
         });
 
+        submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
+            }
+        });
+
+        clearButton.setText("Clear");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,7 +192,7 @@ public class missingReport extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(missingText)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(missingField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(missingItem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(seenText))
                                 .addGap(56, 56, 56)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,26 +200,30 @@ public class missingReport extends javax.swing.JFrame {
                                         .addComponent(missingItemDesc)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(jScrollPane1)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(nameText)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(addressText)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(addressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(submitButton)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(nameText)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(nameTextField))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(addressText)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(addressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(phoneText)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(emailText)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(phoneText)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(phoneTextField))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(emailText)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(clearButton))
                                 .addGap(63, 63, 63)))))
                 .addContainerGap())
         );
@@ -212,7 +250,7 @@ public class missingReport extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(missingText)
-                    .addComponent(missingField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(missingItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(missingItemDesc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +274,11 @@ public class missingReport extends javax.swing.JFrame {
                     .addComponent(emailText)
                     .addComponent(addressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(submitButton)
+                    .addComponent(clearButton))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -273,6 +315,50 @@ public class missingReport extends javax.swing.JFrame {
     private void phoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_phoneTextFieldActionPerformed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        // TODO add your handling code here:
+        clearFields();
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        // TODO add your handling code here:
+        String fullName = nameTextField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String phoneNum = phoneTextField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String unit = unitTextField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String room = roomField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String address = addressTextField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String email = emailTextField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String missingItemInput = missingItem.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String additionalInfo = missingTextArea.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        
+         if(fullName == null || phoneNum == null || unit == null || room == null 
+                || address == null || email == null || missingItemInput == null){
+        try{
+            System.out.println("Connection Successful");
+            // Grab the connection
+            Connection conn = DBConnect.getConnection();
+            Statement sta = conn.createStatement();
+            sta.execute("INSERT INTO incidentMaster (Unit, Room, fullName, phoneNumber,"
+                    + "Address, Email, missingItem, additionalInfo) "
+                    + "VALUES ('"+unit+"','"+room+"','"+fullName+"','"+phoneNum+"','"+address+"','"+email+"',"
+                    + "'"+missingItemInput+"','"+additionalInfo+"');");
+             //Close the connection
+            conn.close();
+        } catch (SQLException err){
+            System.out.println(err.getMessage());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(incidentReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // After submitting to the DB -- reset the fields
+        clearFields();
+        JOptionPane.showMessageDialog(null, "Success!", "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "You must enter values for the text boxes!", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,6 +398,7 @@ public class missingReport extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addressText;
     private javax.swing.JTextField addressTextField;
+    private javax.swing.JButton clearButton;
     private javax.swing.JLabel descText;
     private javax.swing.JLabel emailText;
     private javax.swing.JTextField emailTextField;
@@ -322,7 +409,7 @@ public class missingReport extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JButton mapButton;
     private javax.swing.JButton menuButton;
-    private javax.swing.JTextField missingField;
+    private javax.swing.JTextField missingItem;
     private javax.swing.JLabel missingItemDesc;
     private javax.swing.JLabel missingText;
     private javax.swing.JTextArea missingTextArea;
@@ -335,6 +422,7 @@ public class missingReport extends javax.swing.JFrame {
     private javax.swing.JTextField roomField;
     private javax.swing.JLabel roomText;
     private javax.swing.JLabel seenText;
+    private javax.swing.JButton submitButton;
     private javax.swing.JLabel unitText;
     private javax.swing.JTextField unitTextField;
     // End of variables declaration//GEN-END:variables
