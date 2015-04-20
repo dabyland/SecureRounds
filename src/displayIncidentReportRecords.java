@@ -46,11 +46,11 @@ public class displayIncidentReportRecords extends JFrame implements ActionListen
     
     static JTable table;
 
-    String[] columnNames = {"Unit", "Room", "fullName", "phoneNumber", "Address", "Email", "Activity",
+    String[] columnNames = {"Date", "Room", "fullName", "phoneNumber", "Address", "Email", "Activity",
                 "incidentLocation", "incidentTime", "additionalInfo", "policeStation",
                 "policeNumber", "policeAddress", "officerName", "officerNumber"};
 
-    String date;
+    String Unit;
 
  
 
@@ -129,7 +129,8 @@ public class displayIncidentReportRecords extends JFrame implements ActionListen
 
             }
 
-            c1 = new JComboBox(v);
+            c1 = new JComboBox();
+            c1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Main", "ER", "Food", "THRP", "CC", "RAD", "CT" }));
 
             c1.setBounds(150, 110, 150, 20);
 
@@ -214,12 +215,12 @@ public class displayIncidentReportRecords extends JFrame implements ActionListen
 
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        date = (String) c1.getSelectedItem();
+        Unit = (String) c1.getSelectedItem();
 
 //String textvalue = textbox.getText();
 
         
-        String Unit, Room, fullName, phoneNumber, Address, Email, Activity,
+        String Date, Room, fullName, phoneNumber, Address, Email, Activity,
                 incidentLocation, incidentTime, additionalInfo, policeStation,
                 policeNumber, policeAddress, officerName, officerNumber;
 
@@ -227,15 +228,15 @@ public class displayIncidentReportRecords extends JFrame implements ActionListen
 
         try {
 
-            pst = con.prepareStatement("select * from incidentMaster where incidentDate='" + date + "'");
+            pst = con.prepareStatement("select * from incidentMaster where Unit='" + Unit + "'");
 
             ResultSet rs = pst.executeQuery();
 
             int i = 0;
 
-            if (rs.next()) {
+            while (rs.next()) {
 
-                Unit = rs.getString("Unit");
+                Date = rs.getString("incidentDate");
 
                 Room = rs.getString("Room");
 
@@ -267,7 +268,7 @@ public class displayIncidentReportRecords extends JFrame implements ActionListen
 
                 officerNumber = rs.getString("officerNumber");
 
-                model.addRow(new Object[]{Unit, Room, fullName, phoneNumber, Address, Email, Activity,
+                model.addRow(new Object[]{Date, Room, fullName, phoneNumber, Address, Email, Activity,
                 incidentLocation, incidentTime, additionalInfo, policeStation,
                 policeNumber, policeAddress, officerName, officerNumber});
 
