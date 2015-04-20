@@ -28,7 +28,7 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
 
     JFrame frame1;
     JPanel buttonPanel;
-    JLabel recordLabel, selectDateLabel, l2;
+    JLabel recordLabel, selectUnitLabel, l2;
 
     JComboBox c1;
 
@@ -46,10 +46,10 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
 
     static JTable table;
 
-    String[] columnNames = {"Unit", "Room", "missingItem", "itemDescription", "fullName", "phoneNumber", "Address",
+    String[] columnNames = {"Date", "Room", "missingItem", "itemDescription", "fullName", "phoneNumber", "Address",
                 "Email"};
 
-    String date;
+    String Unit;
 
  
 
@@ -57,13 +57,13 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
 
  
 
-        recordLabel = new JLabel("Obtaining Missing Report Record Information");
+        recordLabel = new JLabel("Obtaining Missing Report Records");
 
         recordLabel.setForeground(Color.red);
 
         recordLabel.setFont(new Font("Serif", Font.BOLD, 20));
 
-        selectDateLabel = new JLabel("Select Date");
+        selectUnitLabel = new JLabel("Select Unit");
 
         b1 = new JButton("Submit");
 
@@ -71,7 +71,7 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
 
         recordLabel.setBounds(100, 50, 350, 40);
 
-        selectDateLabel.setBounds(75, 110, 75, 20);
+        selectUnitLabel.setBounds(75, 110, 75, 20);
 
         b1.setBounds(150, 150, 150, 20);
 
@@ -99,7 +99,7 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
 
         add(recordLabel);
 
-        add(selectDateLabel);;
+        add(selectUnitLabel);
 
         add(b1);
         
@@ -110,19 +110,20 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
             con = DBConnect.getConnection();
             st = con.createStatement();
 
-            rs = st.executeQuery("select missingDate from missingMaster");
+            rs = st.executeQuery("select Unit from missingMaster");
 
             Vector v = new Vector();
 
-            while (rs.next()) {
+//            while (rs.next()) {
+//
+//                ids = rs.getString(1);
+//
+//                v.add(ids);
+//
+//            }
 
-                ids = rs.getString(1);
-
-                v.add(ids);
-
-            }
-
-            c1 = new JComboBox(v);
+            c1 = new JComboBox();
+            c1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Main", "ER", "Food", "THRP", "CC", "RAD", "CT" }));
 
             c1.setBounds(150, 110, 150, 20);
 
@@ -208,31 +209,29 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         
         // Dropdown list of dates from the database
-        date = (String) c1.getSelectedItem();
+        Unit = (String) c1.getSelectedItem();
 
         // Variables to hold data from Database
-        String Unit, Room, missingItem, missingDate, itemDescription, fullName, phoneNumber,
+        String Date, Room, missingItem, itemDescription, fullName, phoneNumber,
                 Address, Email;
 
  
 
         try {
 
-            pst = con.prepareStatement("select * from missingMaster where missingDate='" + date + "'");
+            pst = con.prepareStatement("select * from missingMaster where unit='" + Unit + "'");
 
             ResultSet rs = pst.executeQuery();
 
             int i = 0;
 
-            if (rs.next()) {
+            while (rs.next()) {
 
-                Unit = rs.getString("Unit");
+                Date = rs.getString("missingDate");
 
                 Room = rs.getString("Room");
 
-                missingItem = rs.getString("missingItem");
-
-                missingDate = rs.getString("missingDate");
+                missingItem = rs.getString("missingItem");               
                 
                 itemDescription = rs.getString("itemDescription");
 
@@ -246,7 +245,7 @@ public class displayMissingReportRecords extends JFrame implements ActionListene
 
               
 
-                model.addRow(new Object[]{Unit, Room, fullName, missingItem, missingDate, itemDescription, fullName,
+                model.addRow(new Object[]{Date, Room, missingItem, itemDescription, fullName,
                 phoneNumber, Address, Email});
 
                 i++;

@@ -27,7 +27,7 @@ public class missingReport extends javax.swing.JFrame {
     }
 
     public void clearFields(){
-        unitTextField.setText("");
+        unitBox.setSelectedIndex(0);
         roomField.setText("");
         missingItem.setText("");
         missingTextArea.setText("Basic description of missing item...");
@@ -35,7 +35,7 @@ public class missingReport extends javax.swing.JFrame {
         phoneTextField.setText("");
         addressTextField.setText("");
         emailTextField.setText("");
-        missingDateText.setText("");
+        dateChooserField.setDate(null);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,7 +52,6 @@ public class missingReport extends javax.swing.JFrame {
         descText = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         unitText = new javax.swing.JLabel();
-        unitTextField = new javax.swing.JTextField();
         roomText = new javax.swing.JLabel();
         roomField = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
@@ -75,11 +74,12 @@ public class missingReport extends javax.swing.JFrame {
         phoneTextField = new javax.swing.JTextField();
         submitButton = new javax.swing.JButton();
         clearButton = new javax.swing.JButton();
-        missingDateText = new javax.swing.JTextField();
         label1 = new java.awt.Label();
         label2 = new java.awt.Label();
         label3 = new java.awt.Label();
         label4 = new java.awt.Label();
+        dateChooserField = new com.toedter.calendar.JDateChooser();
+        unitBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,12 +104,6 @@ public class missingReport extends javax.swing.JFrame {
         descText.setText("(In the event of missing equipment throughout the hospital, please fill out this form accordingly)");
 
         unitText.setText("Unit:");
-
-        unitTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                unitTextFieldActionPerformed(evt);
-            }
-        });
 
         roomText.setText("Room Number:");
 
@@ -169,6 +163,8 @@ public class missingReport extends javax.swing.JFrame {
         label4.setForeground(new java.awt.Color(204, 0, 51));
         label4.setText("*");
 
+        unitBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ER", "Food", "CT", "CC", "RAD", "Main", "THRP" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -180,14 +176,9 @@ public class missingReport extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(75, 75, 75)
-                                .addComponent(descText))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(170, 170, 170)
-                                .addComponent(personalDescText)))
-                        .addGap(0, 18, Short.MAX_VALUE))
+                        .addGap(170, 170, 170)
+                        .addComponent(personalDescText)
+                        .addGap(0, 160, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +191,7 @@ public class missingReport extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(unitText)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(unitTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(unitBox, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -214,9 +205,11 @@ public class missingReport extends javax.swing.JFrame {
                                     .addComponent(missingText)
                                     .addComponent(seenText, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(missingItem, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                    .addComponent(missingDateText))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(dateChooserField, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(missingItem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(2, 2, 2)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,32 +220,40 @@ public class missingReport extends javax.swing.JFrame {
                                         .addComponent(missingItemDesc)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(jScrollPane1)))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(submitButton)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(nameText)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(nameTextField))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(addressText)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(addressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(phoneText)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(phoneTextField))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(emailText)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(clearButton))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(nameText)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(phoneText)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(addressText)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGap(233, 233, 233)
+                                                .addComponent(emailText)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(addressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(129, 129, 129)
+                                                .addComponent(submitButton)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(clearButton)
+                                                .addGap(134, 134, 134)))))
                                 .addGap(63, 63, 63)))))
                 .addGap(10, 10, 10))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(descText)
+                .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,9 +271,9 @@ public class missingReport extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(unitText)
-                        .addComponent(unitTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(roomText)
-                        .addComponent(roomField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(roomField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(unitBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -289,7 +290,7 @@ public class missingReport extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(seenText)
-                            .addComponent(missingDateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateChooserField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -303,18 +304,18 @@ public class missingReport extends javax.swing.JFrame {
                             .addComponent(phoneText)
                             .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addressText)
+                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(emailText)
                             .addComponent(addressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(addressText))
+                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(submitButton)
                             .addComponent(clearButton)))
                     .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -344,10 +345,6 @@ public class missingReport extends javax.swing.JFrame {
         new Map().setVisible(true);
     }//GEN-LAST:event_mapButtonActionPerformed
 
-    private void unitTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unitTextFieldActionPerformed
-        
-    }//GEN-LAST:event_unitTextFieldActionPerformed
-
     private void phoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_phoneTextFieldActionPerformed
@@ -361,12 +358,13 @@ public class missingReport extends javax.swing.JFrame {
         // TODO add your handling code here:
         String fullName = nameTextField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String phoneNum = phoneTextField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
-        String unit = unitTextField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String unit = unitBox.getSelectedItem().toString();
         String room = roomField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String address = addressTextField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String email = emailTextField.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         String missingItemInput = missingItem.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
-        String missingDate = missingDateText.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
+        String missingDate = dateChooserField.getDate().toString();
+        
         String additionalInfo = missingTextArea.getText().trim().replace("!@#$%^&*(){}[]\"_+<>?';:,", "");
         // Requires the text boxes to have values entered
         if(unit.length() != 0 && room.length() != 0 &&missingItemInput.length() != 0 
@@ -441,6 +439,7 @@ public class missingReport extends javax.swing.JFrame {
     private javax.swing.JLabel addressText;
     private javax.swing.JTextField addressTextField;
     private javax.swing.JButton clearButton;
+    private com.toedter.calendar.JDateChooser dateChooserField;
     private javax.swing.JLabel descText;
     private javax.swing.JLabel emailText;
     private javax.swing.JTextField emailTextField;
@@ -455,7 +454,6 @@ public class missingReport extends javax.swing.JFrame {
     private java.awt.Label label4;
     private javax.swing.JButton mapButton;
     private javax.swing.JButton menuButton;
-    private javax.swing.JTextField missingDateText;
     private javax.swing.JTextField missingItem;
     private javax.swing.JLabel missingItemDesc;
     private javax.swing.JLabel missingText;
@@ -470,7 +468,7 @@ public class missingReport extends javax.swing.JFrame {
     private javax.swing.JLabel roomText;
     private javax.swing.JLabel seenText;
     private javax.swing.JButton submitButton;
+    private javax.swing.JComboBox unitBox;
     private javax.swing.JLabel unitText;
-    private javax.swing.JTextField unitTextField;
     // End of variables declaration//GEN-END:variables
 }
