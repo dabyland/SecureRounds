@@ -227,6 +227,9 @@
               <Dimension value="[169, 23]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="incidentDBActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="missingDB">
           <Properties>
@@ -238,6 +241,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Missing Equipment Records"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="missingDBActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
